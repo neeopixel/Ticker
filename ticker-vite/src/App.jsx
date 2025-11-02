@@ -686,7 +686,40 @@ export default function App() {
             </div>
           </div>
         </div>
-        {/* Removed right-side Quick actions panel to simplify UI and replace with touch-friendly toolbar */}
+        {/* Right-side TP / SL card (desktop) */}
+        <div className="hidden md:block md:col-span-1">
+          <div className="bg-white p-6 rounded-2xl shadow-sm touch-manipulation md:sticky md:top-6">
+            <div className="mb-4">
+              <div className="text-sm text-slate-500">Take Profit (TP)</div>
+              <div className="text-3xl font-semibold text-green-700">₹ {tpRupees}</div>
+              <div className="text-sm text-slate-400">Per option: ₹ {(tpRupees / lotSize).toFixed(2)}</div>
+              <div className="text-sm mt-2">Needed spot ≈ <span className="font-medium">{expectedTpSpot.toFixed(2)}</span></div>
+              <div className="mt-3 flex gap-2">
+                <button className="flex-1 py-2 rounded-xl bg-green-600 text-white" onClick={() => setTpStr(String(parseNumberOr(tpStr, 0) + tpStep))}>+{tpStep}</button>
+                <button className="flex-1 py-2 rounded-xl bg-red-50 text-red-700" onClick={() => setTpStr(String(Math.max(0, parseNumberOr(tpStr, 0) - tpStep)))}>-{tpStep}</button>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="text-sm text-slate-500">Stop Loss (SL)</div>
+              <div className="text-3xl font-semibold text-red-600">₹ {slRupees}</div>
+              <div className="text-sm text-slate-400">Per option: ₹ {(slRupees / lotSize).toFixed(2)}</div>
+              <div className="text-sm mt-2">SL spot ≈ <span className="font-medium">{expectedSlSpot.toFixed(2)}</span></div>
+              <div className="mt-3 flex gap-2">
+                <button className="flex-1 py-2 rounded-xl bg-green-50 text-green-700" onClick={() => setSlStr(String(parseNumberOr(slStr, 0) + slStep))}>+{slStep}</button>
+                <button className="flex-1 py-2 rounded-xl bg-red-600 text-white" onClick={() => setSlStr(String(Math.max(0, parseNumberOr(slStr, 0) - slStep)))}>-{slStep}</button>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="text-sm text-slate-500">Delta</div>
+              <div className="text-2xl font-semibold">{delta.toFixed(4)}</div>
+            </div>
+            <div className="grid gap-3">
+              <button className="py-3 rounded-xl bg-indigo-600 text-white text-lg font-semibold" onClick={() => setMarketPremiumStr(String(Math.round((parseNumberOr(marketPremiumStr, 0) + premiumStep) * 100) / 100))}>Nudge Premium +{premiumStep}</button>
+              <button className="py-3 rounded-xl bg-gray-100 text-lg font-semibold" onClick={() => { setSstr("58123.45"); setKstr("58200"); setSigmaStr("0.25"); setMarketPremiumStr("120"); setTpStr("1000"); setSlStr("500"); setLotSizeStr("25"); }}>Reset demo</button>
+            </div>
+            <div className="mt-6 text-xs text-slate-400">Touch-optimized controls for desktop/tablet users.</div>
+          </div>
+        </div>
       </div>
       {/* Mobile / touch toolbar (visible on small screens) */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
