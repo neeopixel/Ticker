@@ -1,15 +1,21 @@
-/* Minimal styles for the app */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal base styles and a few helper fallbacks if Tailwind isn't fully loaded */
 html, body, #root {
   height: 100%;
   margin: 0;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
 
-/* A few helper classes to make layout readable without Tailwind */
+/* Fallback helper classes (kept small) */
 .text-sm { font-size: 0.9rem; }
 .text-lg { font-size: 1.125rem; }
 .rounded-xl { border-radius: 12px; }
