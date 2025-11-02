@@ -686,41 +686,61 @@ export default function App() {
             </div>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm">
-          <div className="text-sm text-slate-500 mb-2">Quick actions</div>
-          <div className="flex flex-col gap-2">
-            <button
-              onClick={() => {
-                try {
-                  const txt = JSON.stringify(getSessionObject(), null, 2);
-                  if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(txt).then(() => alert("Session copied to clipboard"));
-                  } else {
-                    prompt("Copy session JSON", txt);
-                  }
-                } catch (e) {
-                  alert("Failed to copy");
+        {/* Removed right-side Quick actions panel to simplify UI and replace with touch-friendly toolbar */}
+      </div>
+      {/* Mobile / touch toolbar (visible on small screens) */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
+        <div className="bg-white/95 backdrop-blur-sm shadow-lg rounded-full px-3 py-2 flex gap-2 items-center touch-manipulation">
+          <button
+            aria-label="Copy session JSON"
+            onClick={() => {
+              try {
+                const txt = JSON.stringify(getSessionObject(), null, 2);
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                  navigator.clipboard.writeText(txt).then(() => alert("Session copied to clipboard"));
+                } else {
+                  prompt("Copy session JSON", txt);
                 }
-              }}
-              className="px-3 py-2 bg-indigo-600 text-white rounded"
-            >
-              Copy session JSON
-            </button>
-            <button
-              onClick={() => {
-                if (!confirm("Clear all saved presets?")) return;
-                setPresets([]);
-                try {
-                  localStorage.removeItem(STORAGE_KEY);
-                } catch (e) {}
-              }}
-              className="px-3 py-2 bg-red-100 text-red-700 rounded"
-            >
-              Clear presets
-            </button>
-            <div className="text-xs text-slate-500 mt-4">Math tests (sanity)</div>
-            <pre className="text-xs bg-slate-50 p-2 rounded overflow-auto">{JSON.stringify(tests, null, 2)}</pre>
-          </div>
+              } catch (e) {
+                alert("Failed to copy");
+              }
+            }}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm font-medium touch-manipulation"
+          >
+            Copy
+          </button>
+
+          <button
+            aria-label="Export presets"
+            onClick={exportPresets}
+            className="px-4 py-2 bg-slate-800 text-white rounded-full text-sm font-medium touch-manipulation"
+          >
+            Export
+          </button>
+
+          <label className="inline-flex items-center px-3 py-2 bg-green-600 text-white rounded-full text-sm font-medium cursor-pointer">
+            Import
+            <input
+              type="file"
+              accept="application/json"
+              onChange={(e) => importPresetsFile(e.target.files && e.target.files[0])}
+              style={{ display: "none" }}
+            />
+          </label>
+
+          <button
+            aria-label="Clear presets"
+            onClick={() => {
+              if (!confirm("Clear all saved presets?")) return;
+              setPresets([]);
+              try {
+                localStorage.removeItem(STORAGE_KEY);
+              } catch (e) {}
+            }}
+            className="px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-medium touch-manipulation"
+          >
+            Clear
+          </button>
         </div>
       </div>
     </div>

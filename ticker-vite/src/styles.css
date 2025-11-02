@@ -23,3 +23,14 @@ html, body, #root {
 .bg-white { background: white; }
 .bg-slate-100 { background: #f1f5f9; }
 .border { border: 1px solid #e6edf3; }
+
+/* Touch-friendly helpers */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Floating toolbar backdrop tweak for small screens */
+@media (max-width: 767px) {
+  .backdrop-blur-sm { backdrop-filter: blur(6px); }
+}
