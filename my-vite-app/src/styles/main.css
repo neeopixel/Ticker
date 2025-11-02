@@ -1,36 +1,18 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal custom styles retained */
+@layer base {
+    body {
+        @apply antialiased bg-white text-slate-900;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 { margin: 0; }
+    a { color: inherit; text-decoration: none; }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: #0056b3;
+@layer components {
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .button { @apply inline-block px-4 py-2 rounded text-white bg-blue-600 hover:bg-blue-700; }
 }
