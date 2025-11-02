@@ -1,0 +1,19 @@
+/* Minimal styles for the app */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+/* A few helper classes to make layout readable without Tailwind */
+.text-sm { font-size: 0.9rem; }
+.text-lg { font-size: 1.125rem; }
+.rounded-xl { border-radius: 12px; }
+.p-3 { padding: 12px; }
+.bg-white { background: white; }
+.bg-slate-100 { background: #f1f5f9; }
+.border { border: 1px solid #e6edf3; }
